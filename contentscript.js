@@ -25,11 +25,12 @@
             let button = document.createElement("img");
             button.id = "takealot-button";
             //set the src of the button to the image
-            button.src = "https://www.servaltracker.com/static/images/logo/serval_1024x1024.png";
+            button.src = "https://github.com/JAB-dev/ServalPriceExt/blob/main/PriceButton.png?raw=true";
             //set the button's text
             button.title = "Click me to open on servaltracker.com";
-            //add a button to the class starting with "buybox-actions"
-            document.getElementsByClassName("buybox-actions")[0].appendChild(button);
+            //Center the button
+            button.style.top = "50%";
+            button.style.left = "50%";
             //add the button to class "pdp-main-panel"
             document.getElementsByClassName("pdp-main-panel")[0].appendChild(button);
             //add the listener to the button
