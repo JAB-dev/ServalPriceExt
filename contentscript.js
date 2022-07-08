@@ -28,9 +28,6 @@
             button.src = "https://github.com/JAB-dev/ServalPriceExt/blob/main/PriceButton.png?raw=true";
             //set the button's text
             button.title = "Click me to open on servaltracker.com";
-            //Center the button
-            button.style.top = "50%";
-            button.style.left = "50%";
             //add the button to class "pdp-main-panel"
             document.getElementsByClassName("pdp-main-panel")[0].appendChild(button);
             //add the listener to the button
@@ -38,6 +35,11 @@
                 //Call a function OnClickEventHandler()
                 OnClickEventHandler();
             });
+            //shrink the button to be half of its parent
+            button.style.width = "100%";
+            button.style.height = "5%";
+            //border to make it more obvious its a button
+            button.style.border = "1px solid black";
         }
     }
 
