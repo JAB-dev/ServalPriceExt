@@ -1,0 +1,31 @@
+{
+    "name": "Takealot Price Tracker",
+    "version": "1.0.0",
+    "description": "Creates a new tab showing the price history data of a product on takealot",
+    "manifest_version": 3,
+    "author": "JAB",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Returns serval price tracking for current link",
+        "default_icon": "128.png"
+    },
+    "permissions": [
+        "tabs"
+    ],
+    "icons": {
+        "16": "icons/16.png",
+        "48": "icons/48.png",
+        "128": "icons/128.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.takealot.com/*"],
+            "js": ["contentscript.js"]
+        }
+    ]
+
+
+}
