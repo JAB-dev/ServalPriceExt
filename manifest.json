@@ -1,6 +1,6 @@
 {
     "name": "Takealot Price Tracker",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Creates a new tab showing the price history data of a product on takealot",
     "manifest_version": 3,
     "author": "JAB",
