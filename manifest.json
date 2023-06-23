@@ -12,6 +12,12 @@
     "permissions": [
         "tabs"
     ],
+	"web_accessible_resources": [
+		{
+			"resources": [ "styling.css" ],
+			"matches": [ "https://www.takealot.com/*" ]
+		}
+	],
     "icons": {
         "16": "icons/16.png",
         "48": "icons/48.png",
@@ -23,7 +29,8 @@
     "content_scripts": [
         {
             "matches": ["https://www.takealot.com/*"],
-            "js": ["contentscript.js"]
+            "js": ["contentscript.js"],
+			"css": ["styling.css"]
         }
     ]
 
