@@ -5,12 +5,12 @@
     "manifest_version": 3,
     "author": "JAB",
     "action":{
-        "default_popup": "index.html",
+        "default_popup": "options.html",
         "default_title": "Returns serval price tracking for current link",
         "default_icon": "128.png"
     },
     "permissions": [
-        "tabs"
+        "tabs","storage"
     ],
 	"web_accessible_resources": [
 		{
@@ -32,7 +32,5 @@
             "js": ["contentscript.js"],
 			"css": ["styling.css"]
         }
-    ]
-
-
+    ],"options_page": "options.html"
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings for price tracker</title>
+    <meta charset="utf-8">
+    <!-- css to make it darkmode and centered -->
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #1e1e1e;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 30px;
+        }
+        select {
+            width: 200px;
+        }
+        label{
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Settings for price tracker</h1>
+    <!-- Combo box for selecting theme between classic yellow and modern blue-->
+    <label for="theme">Select theme:</label>
+    <select id="theme">
+        <option value="modern">Modern Blue</option>
+        <option value="classic">Classic Yellow</option>
+    </select>
+    <script src="options.js"></script>
+</body>
+</html>
