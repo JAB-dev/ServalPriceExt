@@ -25,12 +25,9 @@
             let button = document.createElement("img");
             button.id = "takealot-button";
             //set the src of the button to the image
-            button.src = "https://github.com/JAB-dev/ServalPriceExt/blob/main/PriceButton.png?raw=true";
+            button.src = "https://github.com/HrBingR/ServalPriceExt/blob/main/PriceButton.png?raw=true";
             //set the button's text
             button.title = "Click me to open on servaltracker.com";
-            //Center the button
-            button.style.top = "50%";
-            button.style.left = "50%";
             //add the button to class "pdp-main-panel"
             document.getElementsByClassName("pdp-main-panel")[0].appendChild(button);
             //add the listener to the button
