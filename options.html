@@ -12,7 +12,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 100vh;
+            /* height: 100vh; */
+            min-width: 400px; /* For some reason the page no longer defaults to wide */
+            padding: 20px; /* Otherwise button is flush with edge which looks a little strange */
             margin: 0;
         }
         h1 {
@@ -29,7 +31,7 @@
 </head>
 
 <body>
-    <h1>Settings for price tracker</h1>
+    <h1>Settings</h1>
     <!-- Combo box for selecting theme between classic yellow and modern blue-->
     <label for="theme">Select theme:</label>
     <select id="theme">
