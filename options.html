@@ -3,7 +3,6 @@
 <head>
     <title>Settings for price tracker</title>
     <meta charset="utf-8">
-    <!-- css to make it darkmode and centered -->
     <style>
         body {
             font-family: sans-serif;
@@ -27,17 +26,26 @@
         label{
             font-size: 20px;
         }
+        .setting-group {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
 <body>
     <h1>Settings</h1>
-    <!-- Combo box for selecting theme between classic yellow and modern blue-->
-    <label for="theme">Select theme:</label>
-    <select id="theme">
-        <option value="modern">Modern Blue</option>
-        <option value="classic">Classic Yellow</option>
-    </select>
+    <div id="install-update-message" style="display: none; margin-bottom: 15px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: #2a2a2a;"></div>
+    <div class="setting-group">
+        <label for="theme">Select theme:</label>
+        <select id="theme">
+            <option value="modern">Modern Blue</option>
+            <option value="classic">Classic Yellow</option>
+        </select>
+    </div>
+    <div class="setting-group">
+        <label for="little-button">Use Small Button:</label>
+        <input type="checkbox" id="little-button">
+    </div>
     <script src="options.js"></script>
 </body>
 </html>

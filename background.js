@@ -1,11 +1,27 @@
-//alert the contentscript when we are on takealot.com and "PLID" is in the url
-//create a listener
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if ( (tab.url.indexOf("takealot.com") > -1 ) && (tab.url.indexOf("PLID") > -1) ) {
         chrome.tabs.sendMessage(tabId, {message: "OnTakealot"});
     }
 }
 );
+
+chrome.runtime.onInstalled.addListener((details) => {
+    // Check if values already exist, and set defaults only if they don't
+    chrome.storage.local.get(['enableLittleButton', 'theme'], (result) => {
+        if (result.enableLittleButton === undefined) {
+            chrome.storage.local.set({ enableLittleButton: false });
+        }
+        if (result.theme === undefined) {
+            chrome.storage.local.set({ theme: 'modern' });
+        }
+    });
+    
+    if (details.reason === "install" || details.reason === "update") {
+        const optionsUrl = chrome.runtime.getURL('options.html');
+        const urlWithParam = `${optionsUrl}?reason=${details.reason}`;
+        chrome.tabs.create({ url: urlWithParam });
+    }
+});
 
 async function fetchData(url) {
     //we want to extract  the 8 digit code after PLID from the url and return https://www.servaltracker.com/products/PLIDXXXXXXXX/
@@ -27,11 +43,9 @@ async function fetchData(url) {
 
 }
 
-//Function OnClickEventHandler()
 const OnClickEventHandler = () => {
     chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
         let url = tabs[0].url;
-        // use `url` here inside the callback because it's asynchronous!
         fetchData(url).then(data => {
             if (data != null) {
                chrome.tabs.create({url: data});
