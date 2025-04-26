@@ -1,27 +1,38 @@
-(() => {
-    // Get the select element by its id
-    var selectElement = document.getElementById('theme');
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const reason = urlParams.get('reason');
 
-    //make sure the currently selected theme is selected in the dropdown
-    chrome.storage.local.get('theme', function(result) {
-        // Check if the 'theme' value exists in local storage
+    const messageDiv = document.getElementById('install-update-message');
+
+    if (reason === 'install' && messageDiv) {
+        messageDiv.textContent = "Welcome! Thanks for installing Serval Price Extension. Configure your preferences below.";
+        messageDiv.style.display = 'block';
+    } else if (reason === 'update' && messageDiv) {
+        messageDiv.textContent = "Serval Price Extension has been updated! Check out the new small button option below.";
+        messageDiv.style.display = 'block';
+    }
+
+    // Load saved settings
+    chrome.storage.local.get(['theme', 'enableLittleButton'], (result) => {
         if (result.theme) {
-            // Perform the necessary action based on the selected theme value
-            if (result.theme === 'classic') {
-                //make sure the first option value is actually  <option value="classic">Classic Yellow</option>
-                selectElement.value = "classic";
-            }
+            document.getElementById('theme').value = result.theme;
+        }
+        if (result.enableLittleButton !== undefined) {
+            document.getElementById('little-button').checked = result.enableLittleButton;
         }
     });
-    
-    // Add event listener to detect changes
-    selectElement.addEventListener('change', function() {
-        // Get the selected value
-        var selectedValue = selectElement.value;
 
-        // Store the selected value in local storage
-        chrome.storage.local.set({ theme: selectedValue });
+    // Save theme selection
+    document.getElementById('theme').addEventListener('change', (event) => {
+        chrome.storage.local.set({ theme: event.target.value }, () => {
+            console.log(`Theme set to ${event.target.value}`);
+        });
     });
 
-
-})();
+    // Save little button checkbox state
+    document.getElementById('little-button').addEventListener('change', (event) => {
+        chrome.storage.local.set({ enableLittleButton: event.target.checked }, () => {
+            console.log(`Enable Little Button set to ${event.target.checked}`);
+        });
+    });
+});
