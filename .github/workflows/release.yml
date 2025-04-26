@@ -1,0 +1,35 @@
+name: Release Chrome Extension
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create ZIP file
+        run: |
+          mkdir -p release
+          zip -r release/ServalPriceExt.zip \
+            manifest.json \
+            background.js \
+            contentscript.js \
+            options.html \
+            options.js \
+            styling.css \
+            fetchPrice.js \
+            index.html \
+            icons/
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release/ServalPriceExt.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
