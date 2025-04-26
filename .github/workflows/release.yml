@@ -24,7 +24,8 @@ jobs:
       - name: Create ZIP file
         run: |
           mkdir -p release
-          zip -r release/ServalPriceExt.zip \
+          # Include version in zip filename
+          zip -r release/ServalPriceExt-v${{ steps.get_version.outputs.VERSION }}.zip \
             manifest.json \
             background.js \
             contentscript.js \
@@ -39,7 +40,7 @@ jobs:
         if: github.event_name == 'push'
         uses: softprops/action-gh-release@v1
         with:
-          files: release/ServalPriceExt.zip
+          files: release/ServalPriceExt-v${{ steps.get_version.outputs.VERSION }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -49,6 +50,6 @@ jobs:
         with:
           tag_name: v${{ steps.get_version.outputs.VERSION }}
           name: Release v${{ steps.get_version.outputs.VERSION }}
-          files: release/ServalPriceExt.zip
+          files: release/ServalPriceExt-v${{ steps.get_version.outputs.VERSION }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
