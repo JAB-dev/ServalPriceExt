@@ -26,6 +26,7 @@ async function fetchData(url) {
     return null;
 
 }
+
 //Function OnClickEventHandler()
 const OnClickEventHandler = () => {
     chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
