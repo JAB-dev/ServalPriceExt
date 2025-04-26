@@ -6,11 +6,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 );
 
 chrome.runtime.onInstalled.addListener((details) => {
-    if (details.reason === "install" || details.reason === "update") {
-        const optionsUrl = chrome.runtime.getURL('options.html');
-        const urlWithParam = `${optionsUrl}?reason=${details.reason}`;
-        chrome.tabs.create({ url: urlWithParam });
-    }
     // Check if values already exist, and set defaults only if they don't
     chrome.storage.local.get(['enableLittleButton', 'theme'], (result) => {
         if (result.enableLittleButton === undefined) {
@@ -20,6 +15,12 @@ chrome.runtime.onInstalled.addListener((details) => {
             chrome.storage.local.set({ theme: 'modern' });
         }
     });
+    
+    if (details.reason === "install" || details.reason === "update") {
+        const optionsUrl = chrome.runtime.getURL('options.html');
+        const urlWithParam = `${optionsUrl}?reason=${details.reason}`;
+        chrome.tabs.create({ url: urlWithParam });
+    }
 });
 
 async function fetchData(url) {
