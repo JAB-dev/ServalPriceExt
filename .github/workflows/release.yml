@@ -14,6 +14,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Get version from manifest
+        id: get_version
+        run: |
+          VERSION=$(grep -o '"version": *"[^"]*"' manifest.json | cut -d'"' -f4)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Found version: $VERSION"
+
       - name: Create ZIP file
         run: |
           mkdir -p release
@@ -28,9 +35,20 @@ jobs:
             index.html \
             icons/
 
-      - name: Upload Release
+      - name: Upload Release (from tag)
+        if: github.event_name == 'push'
         uses: softprops/action-gh-release@v1
         with:
+          files: release/ServalPriceExt.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Release (manual run)
+        if: github.event_name == 'workflow_dispatch'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.get_version.outputs.VERSION }}
+          name: Release v${{ steps.get_version.outputs.VERSION }}
           files: release/ServalPriceExt.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
